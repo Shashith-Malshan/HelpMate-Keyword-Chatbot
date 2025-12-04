@@ -27,8 +27,6 @@ function appendMessage(sender, text) {
 
     chatBox.appendChild(msgContainer);
     chatBox.scrollTop = chatBox.scrollHeight;
-
-
 }
 
 function showTyping(duration = 1000) {
@@ -38,7 +36,7 @@ function showTyping(duration = 1000) {
 
     const bubble = document.createElement("div");
     bubble.className = "px-4 py-2 rounded-xl max-w-xs bg-gray-200 text-gray-800 flex items-center";
-    bubble.innerHTML = 'Bot is typing <span class="animate-pulse">...</span>';
+    bubble.innerHTML = 'HelpMate is typing <span class="animate-pulse">...</span>';
 
     typingContainer.appendChild(bubble);
     chatBox.appendChild(typingContainer);
@@ -52,6 +50,11 @@ function showTyping(duration = 1000) {
     });
 }
 
+function getBotResponse(msg) {
+    const text = msg.toLowerCase();
+
+}
+
 async function sendMessage() {
     const message = userInput.value.trim();
     if (!message) return;
@@ -59,13 +62,19 @@ async function sendMessage() {
     appendMessage("user", message);
     userInput.value = "";
 
-    // Typing animation
     await showTyping(1000);
 
-    appendMessage("bot", "Hello! I am here to help you.");
+    const botReply = getBotResponse(message);
+    appendMessage("bot", botReply);
 }
+
 
 sendBtn.addEventListener("click", sendMessage);
 userInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") sendMessage();
 });
+
+
+window.onload = () => {
+    appendMessage("bot", "Hello! I’m HelpMate 👋 How can I assist you today?");
+};
