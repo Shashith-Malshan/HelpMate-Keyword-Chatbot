@@ -51,3 +51,21 @@ function showTyping(duration = 1000) {
         }, duration);
     });
 }
+
+async function sendMessage() {
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    appendMessage("user", message);
+    userInput.value = "";
+
+    // Typing animation
+    await showTyping(1000);
+
+    appendMessage("bot", "Hello! I am here to help you.");
+}
+
+sendBtn.addEventListener("click", sendMessage);
+userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+});
