@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelpMate</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    
+
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    <!-- chatBot container -->
+    <div class="w-100 h-100 bg-white shadow-lg rounded-lg flex flex-column">
+
+        <!-- Header -->
+        <div class="bg-blue-600 text-white p-3 rounded-t-lg">
+            <h2 class="text-lg font-semibold">HelpMate</h2>
+        </div>
+
+        <!-- Chat Messages (Scrollable) -->
+        <div id="chatBox" class="flex-1 p-3 space-y-2 overflow-y-auto bg-gray-50">
+
+        </div>
+
+        <!-- input section -->
+        <div class="p-3 border-t flex">
+            <input id="userInput" type="text" placeholder="Type a message..."
+                class="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button id="sendBtn" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                Send
+            </button>
+        </div>
+
+    </div>
+
+    <script src="assets/js/app.js"></script>
 </body>
+
 </html>
