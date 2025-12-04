@@ -11,22 +11,43 @@ function getTimestamp() {
     return `${hours}:${minutes}`;
 }
 
-function appendMessage(sender,text){
-    const msgContainer=document.createElement("div");
-    msgContainer.className=`flex flex-col ${sender === "bot" ? "items-start" : "items-end"}`;
+function appendMessage(sender, text) {
+    const msgContainer = document.createElement("div");
+    msgContainer.className = `flex flex-col ${sender === "bot" ? "items-start" : "items-end"}`;
 
-    const bubble=document.createElement("div");
-    bubble.className= `px-4 py-2 rounded-xl max-w-xs ${sender === "bot" ? "bg-gray-200 text-gray-800" : "bg-blue-600 text-white"}`;
-    bubble.textContent=text;
+    const bubble = document.createElement("div");
+    bubble.className = `px-4 py-2 rounded-xl max-w-xs ${sender === "bot" ? "bg-gray-200 text-gray-800" : "bg-blue-600 text-white"}`;
+    bubble.textContent = text;
     msgContainer.appendChild(bubble);
 
-    const timestamp=document.createElement("span");
-    timestamp.className="text-xs text-gray-500 mt-1";
-    timestamp.textContent=getTimestamp();
+    const timestamp = document.createElement("span");
+    timestamp.className = "text-xs text-gray-500 mt-1";
+    timestamp.textContent = getTimestamp();
     msgContainer.appendChild(timestamp);
 
     chatBox.appendChild(msgContainer);
-    chatBox.scrollTop=chatBox.scrollHeight;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
 
+}
+
+function showTyping(duration = 1000) {
+    const typingContainer = document.createElement("div");
+    typingContainer.id = "typingBubble";
+    typingContainer.className = "flex flex-col items-start";
+
+    const bubble = document.createElement("div");
+    bubble.className = "px-4 py-2 rounded-xl max-w-xs bg-gray-200 text-gray-800 flex items-center";
+    bubble.innerHTML = 'Bot is typing <span class="animate-pulse">...</span>';
+
+    typingContainer.appendChild(bubble);
+    chatBox.appendChild(typingContainer);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    return new Promise(resolve => {
+        setTimeout(() => {
+            typingContainer.remove();
+            resolve();
+        }, duration);
+    });
 }
